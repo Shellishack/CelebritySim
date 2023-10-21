@@ -1,0 +1,316 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* start css */
+.start-container{
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  background-image: url('/public/bg.png');
+  font-size: 40px;
+  color: #fff;
+}
+.start-container .text-ai{
+  position: absolute;
+  top: 170px;
+  left: 40%;
+  transform: rotate(-50deg);
+  font-size: 120px;
+  opacity: 0.6;
+}
+.start-container .text-celebrity{
+  position: absolute;
+  top:130px;
+  left: 60%;
+  transform: rotate(40deg);
+  font-size: 120px;
+  opacity: 0.6;
+}
+.start-container .text-center{
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 400px;
+  left: 0;
+}
+
+/* role csss */
+.role-container{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/public/bg.png');
+  color: #fff;
+}
+.masking-out{
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.role-container h2{
+  line-height: 120px;
+  text-align: center;
+  font-size: 50px;
+  color: #fff;
+}
+.role-container p a{
+  color: #fff;
+}
+
+.role-container p{
+  text-align: center;
+  font-size: 50px;
+  margin-top: 50px;
+}
+.role-container .text-bottom{
+  margin: 150px auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* prompt css*/
+.prompt-container{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/public/bg.png');
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.prompt-container .prompt-text{
+  background-color: #eee;
+  border-radius: 12px;
+  padding: 30px;
+  width: 60%;
+  margin: 30px 30px 60px 30px;
+}
+
+.prompt-input input{
+  width: 80%;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 18px;
+  padding: 0 20px;
+}
+
+.prompt-input button{
+  width: 10%;
+  border: 1px solid blueviolet;
+  border-radius: 10px;
+  color: blueviolet;
+  font-size: 20px;
+  padding: 3px 6px;
+  margin-left: 2%;
+}
+
+/* celecbrity css */
+.celebrity-container{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/public/bg.png');
+}
+
+.celebrity-container .masking-out>h1{
+  line-height: 120px;
+  text-align: center;
+  color: #fff;
+}
+
+.img-container{
+  text-align: center;
+  margin-top: 160px;
+}
+
+.img-container img{
+  border: 30px solid #f4f494;
+}
+
+.img-container img:nth-child(1){
+  transform: rotate(10deg);
+}
+
+.img-container img:nth-child(2){
+  transform: rotate(-10deg);
+}
+
+.img-container img:nth-child(3){
+  transform: rotate(10deg);
+}
+
+.img-container img:nth-child(4){
+  transform: rotate(-10deg);
+}
+
+/* celebrityDaily css */
+.celebrity-daily-container{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.celebrity-daily-container>div:nth-child(1){
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.celebrity-daily-container>div:nth-child(2){
+  flex: 2;
+}
+
+.celebrity-daily-container img{
+  width: 100%;
+}
+
+.celebrity-daily-input-container{
+  flex: 1;
+  background-color: #eee;
+  padding: 10px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.celebrity-daily-chat>input{
+  border: none;
+  width: 80%;
+  outline: none;
+  height: 40px;
+  border-radius: 10px;
+  padding-left: 20px;
+}
+
+.celebrity-daily-chat>button{
+  background-color: #fff;
+  border-radius: 100px;
+  padding: 12px 20px;
+  border: none;
+  margin-left: 2%;
+  color: blueviolet;
+}
+
+.celebrity-daily-input-container>ul{
+  max-height: 200px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.celebrity-daily-input-container>ul li{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.celebrity-daily-input-container>ul .assistant{
+  flex-direction: row-reverse;
+}
+.celebrity-daily-input-container>ul li i{
+  display: block;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 30px;
+}
+
+.celebrity-daily-input-container>ul .human i{
+  background-color: red;
+  margin-right: 10px;
+}
+
+.celebrity-daily-input-container>ul .human span{
+  background-color: #2ccf2c;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.celebrity-daily-input-container>ul .assistant i{
+  background-color: green;
+  margin-left: 10px;
+}
+
+.celebrity-daily-input-container>ul .assistant span{
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.celebrity-info{
+  height: 100%;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+}
+
+.celebrity-info>div:nth-child(1){
+  flex: 1;
+}
+
+.celebrity-info>div:nth-child(2){
+  flex: 3;
+}
+
+.celebrity-info>div:nth-child(2){
+  border-top: 2px solid #ccc;
+}
+.celebrity-info>div:nth-child(2) li{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+.celebrity-info>div:nth-child(2) li i{
+  display: block;
+  height: 100%;
+  min-width: 50px;
+  margin-right: 10px;
+  background-color: #2ccf2c;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+}
+
+.info>div:nth-child(1){
+  display: flex;
+  min-height: 100px;
+}
+
+.info>div:nth-child(1)>div{
+  flex: 1;
+
+}
+
+/* .info>div:nth-child(1) p{
+  
+} */
+
+.info>div:nth-child(1) div{
+  margin: 0 auto;
+}
+
+.fan>div{
+  display: flex;
+}
+
+.fan>div p:nth-child(1){
+  background-color: #2ccf2c;
+}
+
+.fan>div p:nth-child(2){
+  background-color: rebeccapurple;
+}
+
+.fan>div p:nth-child(3){
+  background-color: blue;
+}
