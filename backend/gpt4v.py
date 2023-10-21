@@ -171,6 +171,8 @@ def upload_pil_image(driver, pil_img, prompt_text, multiple=False):
 
 # 使用自己的用户数据来解决验证问题；注意，必须关掉所有的chrome窗口，否则会报错
 # 修改User为自己的用户名
+# The prompt here must not contain any non-BMP characters. 
+# It should also not contain any newline characters.
 def create_images(prompt):
     chrome_user_data_path = os.environ.get("CHROME_USER_DATA_PATH")
 
