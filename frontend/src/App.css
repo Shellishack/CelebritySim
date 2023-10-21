@@ -77,8 +77,12 @@
   background-image: url('/public/bg.png');
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
+}
+.prompt-container>h1{
+  margin-top: 20px;
+  color: #fff;
 }
 
 .prompt-container .prompt-text{
@@ -86,7 +90,6 @@
   border-radius: 12px;
   padding: 30px;
   width: 60%;
-  margin: 30px 30px 60px 30px;
 }
 
 .prompt-input input{
@@ -124,7 +127,7 @@
 
 .img-container{
   text-align: center;
-  margin-top: 160px;
+  /* margin-top: 160px; */
 }
 
 .img-container img{

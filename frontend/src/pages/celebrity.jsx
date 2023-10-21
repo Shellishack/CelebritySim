@@ -18,9 +18,6 @@ export default function Celebrity(){
                 <h1>选择你的养成对象</h1>
                 <div className='img-container'>
                     <img src="/bg.png" alt=""  width={300} height={200} onClick={() => selectedImg('/bg.png')}/>
-                    <img src="/bg.png" alt=""  width={300} height={200}/>
-                    <img src="/bg.png" alt=""  width={300} height={200}/>
-                    <img src="/bg.png" alt=""  width={300} height={200}/>
                 </div>
             </div>
         </div>
