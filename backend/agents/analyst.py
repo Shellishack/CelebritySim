@@ -40,32 +40,26 @@ In your prediction, you must include the following:
     "viewer_count": (viewer count),
 }}
 
-Do 5 such predictions. You must make sure all your predictions are different. \
-Then return in the following json format:
-{{
-    "predictions": [
-        (your 5 predictions)
-    ]
-}}
-
+Do 5 such predictions but you need to pick the best one later. \
+For the five predictions, you must make sure all your predictions are different. You do not need to return them all. \
+Then, you must find the prediction with the highest prediction likelihood.
+Finally, return only this one prediction in the json format. You must not return your intermediate thinking \
+and reasoning process. 
 """
 
+
 def analyze_celebrity_behaviour(
-        celebrity_post: str,
-        subscriber_count: int,
-        hater_ratio: float,
-        fan_ratio: float,
-        neutral_ratio: float    
-    ):
+    celebrity_post: str,
+    subscriber_count: int,
+    hater_ratio: float,
+    fan_ratio: float,
+    neutral_ratio: float,
+):
     chain = LLMChain(
         llm=gpt_4,
         prompt=ChatPromptTemplate.from_messages(
-            [
-                HumanMessagePromptTemplate.from_template(
-                    template_chat_with_analyst
-                )   
-            ]
-        )
+            [HumanMessagePromptTemplate.from_template(template_chat_with_analyst)]
+        ),
     )
 
     result = chain.run(
@@ -73,25 +67,27 @@ def analyze_celebrity_behaviour(
         subscriber_count=subscriber_count,
         hater_ratio=hater_ratio,
         fan_ratio=fan_ratio,
-        neutral_ratio=neutral_ratio
+        neutral_ratio=neutral_ratio,
     )
 
     tries = 3
     while tries > 0:
         try:
             result_json = json.loads(result)
-            break
+            return result_json
         except:
-            print(
-                "Error: Result is not a valid json. Trying again..."
-            )
+            print("Error: Result is not a valid json. Trying again...")
+            print(result)
+
             result = chain.run(
                 celebrity_post=celebrity_post,
                 subscriber_count=subscriber_count,
                 hater_ratio=hater_ratio,
                 fan_ratio=fan_ratio,
-                neutral_ratio=neutral_ratio
+                neutral_ratio=neutral_ratio,
             )
             tries -= 1
+            if tries == 0:
+                raise
 
     return result_json

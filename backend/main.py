@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from agents.celebrity import chat_with_manager
+from agents.celebrity import Celebrity
 from agents.analyst import analyze_celebrity_behaviour
 from gpt4v import create_images
 
+
 app = FastAPI()
+
+celebrity = Celebrity()
 
 
 class CelebrityChatBody(BaseModel):
@@ -13,7 +16,7 @@ class CelebrityChatBody(BaseModel):
 
 @app.post("/celebrity/chat")
 def celebrity_chat(body: CelebrityChatBody):
-    return chat_with_manager(body.message_from_manager)
+    return celebrity.chat_with_manager(body.message_from_manager)
 
 
 # class CelebrityPostBody(BaseModel):
@@ -42,6 +45,12 @@ def celebrity_chat(body: CelebrityChatBody):
 #     images_url = create_images(body.prompt)
 #     return images_url
 
-# @app.get("/celebrity/post")
-# def celebrity_post():
+@app.get("/celebrity/post")
+def celebrity_post():
+    pass
+
+
+@app.get("/test")
+def test():
+    return "Success"
     
