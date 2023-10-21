@@ -76,7 +76,7 @@ export default function CelebrityDaily(){
                             </div>
                             <div>
                                 <p>粉丝量</p>
-                                <div>进度条</div>
+                                <div>25000</div>
                             </div>
                         </div>
                         <div className="fan">
@@ -99,8 +99,27 @@ export default function CelebrityDaily(){
                     </div>
                 </div>
             </div>
-            <div className="modal-box" style={{display: 'none'}}>
-                window
+            <div className="modal-box">
+                <div className="modal-box-header">
+                    <p>X</p>
+                </div>
+                <div className="model-box-body">
+                    <div className="iphone-box">
+                        <img src="/iphone.jpg" alt="" height={600}/>
+                        <img src="/bg.png" alt="" width={200}/>
+                        <p>
+                        日报：今天超天酱出外景拍了一组胶片写真，发了美美的照片，蹭蹭涨粉10000。心情+
+                        </p>
+                    </div>
+                    <div className="body-text">
+                        <p>粉丝A：我晕 不是我说姐妹你好好看！</p>
+                        <p>粉丝B：。。。</p>
+                        <p>粉丝C：好漂亮呀！！</p>
+                        <div>
+                        日报：今天超天酱出外景拍了一组胶片写真，发了美美的照片，蹭蹭涨粉10000。心情+
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
         // <div style={{backgroundImage: `url(${})`, width: "100vw", height: "100vh"}}>
