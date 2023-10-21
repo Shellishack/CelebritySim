@@ -38,6 +38,7 @@ In your prediction, you must include the following:
     "subscriber_reaction_to_celebrity_post": (subscriber's reaction to the celebrity's new post in a few sentences),
     "prediction_likelihood": (prediction likelihood in float between 0 and 1),
     "viewer_count": (viewer count),
+    "comments": (create a json list of strings containing 5 comments that you think the audience will make),
 }}
 
 Do 5 such predictions but you need to pick the best one later. \
@@ -76,7 +77,7 @@ def analyze_celebrity_behaviour(
             result_json = json.loads(result)
             return result_json
         except:
-            print("Error: Result is not a valid json. Trying again...")
+            print("Error: Result of analysis is not a valid json. Trying again...")
             print(result)
 
             result = chain.run(

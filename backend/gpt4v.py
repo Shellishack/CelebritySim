@@ -189,4 +189,5 @@ def create_images(prompt):
     return image_list
 
 if __name__ == "__main__":
-    create_images("生成一个白发女孩")
+    a = "a tree"
+    create_images(f"""Create images for: ```{a}```""")

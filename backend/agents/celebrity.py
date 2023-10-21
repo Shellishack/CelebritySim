@@ -1,4 +1,5 @@
 import json
+import re
 from langchain.chains import LLMChain
 from langchain.prompts import (
     ChatPromptTemplate,
@@ -6,6 +7,7 @@ from langchain.prompts import (
     SystemMessagePromptTemplate,
 )
 from agents.analyst import analyze_celebrity_behaviour
+from gpt4v import create_images
 
 from llm import gpt_4
 
@@ -141,10 +143,14 @@ class Celebrity:
                     {"speaker": "self", "content": message_from_self}
                 )
                 # print("Dialogue history: ", self.dialogue_history)
-                return result_json
+                return {
+                    "responding_message": result_json["responding_message"],
+                    "is_posting": result_json["is_posting"],
+                    "mood": result_json["mood"],
+                }
             except:
                 print(result)
-                print("Error: Result is not a valid json. Trying again...")
+                print("Error: Result of chat is not a valid json. Trying again...")
 
                 result = chain.run(
                     manager_from_manager=message_from_manager,
@@ -155,7 +161,7 @@ class Celebrity:
                 if tries == 0:
                     raise
 
-    def post(self):
+    def post(self, is_gen_image: bool = False):
         chain = LLMChain(
             llm=gpt_4,
             prompt=ChatPromptTemplate.from_messages(
@@ -174,30 +180,57 @@ class Celebrity:
         while tries > 0:
             try:
                 result_json = json.loads(result)
-                post = result_json["post_text"]
 
-                analysis = analyze_celebrity_behaviour(
-                    post,
-                    self.sub_count,
-                    self.hater_ratio,
-                    self.fan_ratio,
-                    self.neutral_ratio,
-                )
-
-                return {
-                    "post": post,
-                    "subscriber_count": self.sub_count+int(analysis["number_of_new_subscribers"]),
-                    "hater_ratio": float(analysis["new_hater_ratio"]),
-                    "fan_ratio": float(analysis["new_fan_ratio"]),
-                    "neutral_ratio": float(analysis["new_neutral_ratio"]),
-                }
+                break
             except:
-                print("Error: Result is not a valid json. Trying again...")
+                print("Error: Result of post is not a valid json. Trying again...")
 
                 result = chain.run(status=self._get_status())
                 tries -= 1
                 if tries == 0:
                     raise
+
+        post_text = result_json["post_text"]
+        image_prompt = f"""Create images for the following post on social media:```{post_text}```"""
+        image_prompt = re.sub('[^\u0000-\uFFFF]', '', image_prompt)
+
+        analysis = analyze_celebrity_behaviour(
+            post_text,
+            self.sub_count,
+            self.hater_ratio,
+            self.fan_ratio,
+            self.neutral_ratio,
+        )
+
+        self.sub_count += int(analysis["number_of_new_subscribers"])
+        self.hater_ratio = float(analysis["new_hater_ratio"])
+        self.fan_ratio = float(analysis["new_fan_ratio"])
+        self.neutral_ratio = float(analysis["new_neutral_ratio"])
+
+        if is_gen_image:
+            image_links = create_images(
+                image_prompt
+            )
+            return {
+                "post": post_text,
+                "subscriber_count": self.sub_count,
+                "hater_ratio": self.hater_ratio,
+                "fan_ratio": self.fan_ratio,
+                "neutral_ratio": self.neutral_ratio,
+                "viewer_count": int(analysis["viewer_count"]),
+                "comments": analysis["comments"],
+                "image_links": image_links,
+            }
+
+        return {
+            "post": post_text,
+            "subscriber_count": self.sub_count,
+            "hater_ratio": self.hater_ratio,
+            "fan_ratio": self.fan_ratio,
+            "neutral_ratio": self.neutral_ratio,
+            "viewer_count": int(analysis["viewer_count"]),
+            "comments": analysis["comments"],
+        }
 
     def _get_status(self):
         status_dict = {
@@ -210,7 +243,5 @@ class Celebrity:
         }
 
         s = json.dumps(status_dict, indent=4)
-
-        print(s)
 
         return s
